@@ -8,10 +8,13 @@
 
 import UIKit
 import os.log
+import Alamofire
+import AlamofireImage
+
 
 class ContactVC: UITableViewController {
     
-    var arrContacts: [Data]  = []
+    var arrContacts: [Contact]  = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,11 +63,13 @@ class ContactVC: UITableViewController {
         // Configure the cell...
         let contact = arrContacts[indexPath.row]
         cell.lblName.text = contact.name
-//        cell.imageView?.image = UIImage(contentsOfFile: contact.profilePic!)
+        
+        if let url = URL(string: contact.profilePic!) {
+            cell.imgContact.af_setImage(withURL: url)
+        }
 
         return cell
     }
-    
 
     /*
     // Override to support conditional editing of the table view.
@@ -118,11 +123,16 @@ class ContactVC: UITableViewController {
         AFWrapper.requestGetContacts(params: nil, success: {
             (resJson) -> Void in
             
-            let dataBase = DataBase.init(dictionary: resJson.dictionaryObject! as NSDictionary)
-            self.arrContacts = (dataBase?.data)!
-            os_log("data-----------------%@", log: .default, type: .debug,  self.arrContacts)
+            let dataBase = ContactBase.init(dictionary: resJson.dictionaryObject! as NSDictionary)
             
-            self.tableView.reloadData()
+            if let arrContactData = dataBase?.data {
+                self.arrContacts = arrContactData
+                os_log("data-----------------%@", log: .default, type: .debug,  self.arrContacts)
+                
+                self.tableView.reloadData()
+            }
+            
+            
             
         }) {
             (error) -> Void in

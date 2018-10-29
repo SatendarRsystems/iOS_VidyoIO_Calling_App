@@ -6,8 +6,9 @@ target 'VIOCalling' do
   use_frameworks!
 
   # Pods for VIOCalling
-  pod 'Alamofire', '~> 4.7'
+  pod 'Alamofire', '~> 4.7.3'
+  pod 'AlamofireImage', '~> 3.4.1'
   pod 'IQKeyboardManagerSwift', '5.0.7'
-  pod 'SwiftyJSON'
+  pod 'SwiftyJSON', '~> 4.2.0'
 
 end
