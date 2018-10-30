@@ -65,38 +65,6 @@
             endingLineNumber = "130"
             landmarkName = "onDisconnected(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VIO.JoinMeetingVC.onDisconnected(__C.VCConnectorDisconnectReason) -&gt; ()"
-                  moduleName = "VIO"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/arunlvn/Documents/Projects/VidyoIO/VIO/ViewControllers/JoinMeetingVC.swift"
-                  timestampString = "562140327.8812881"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "131"
-                  endingLineNumber = "131"
-                  offsetFromSymbolStart = "179">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in VIO.JoinMeetingVC.onDisconnected(__C.VCConnectorDisconnectReason) -&gt; ()"
-                  moduleName = "VIO"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/arunlvn/Documents/Projects/VidyoIO/VIO/ViewControllers/JoinMeetingVC.swift"
-                  timestampString = "562140327.885462"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "132"
-                  endingLineNumber = "132"
-                  offsetFromSymbolStart = "4">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -368,38 +336,6 @@
             endingLineNumber = "119"
             landmarkName = "onFailure(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VIO.JoinMeetingVC.onFailure(__C.VCConnectorFailReason) -&gt; ()"
-                  moduleName = "VIO"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/arunlvn/Documents/Projects/VidyoIO/VIO/ViewControllers/JoinMeetingVC.swift"
-                  timestampString = "562140327.952545"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "119"
-                  endingLineNumber = "119"
-                  offsetFromSymbolStart = "481">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in VIO.JoinMeetingVC.onFailure(__C.VCConnectorFailReason) -&gt; ()"
-                  moduleName = "VIO"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/arunlvn/Documents/Projects/VidyoIO/VIO/ViewControllers/JoinMeetingVC.swift"
-                  timestampString = "562140327.956745"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "120"
-                  endingLineNumber = "120"
-                  offsetFromSymbolStart = "18">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

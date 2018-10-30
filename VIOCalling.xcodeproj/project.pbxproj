@@ -30,6 +30,8 @@
 		2DE060C0215E2F3B00B8252E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DE060BF215E2F3A00B8252E /* CoreLocation.framework */; };
 		2DE060C2215E2F4C00B8252E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DE060C1215E2F4B00B8252E /* CoreMedia.framework */; };
 		2DE060C4215E2F5300B8252E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DE060C3215E2F5300B8252E /* SystemConfiguration.framework */; };
+		2DEDF803218729E8008B477E /* ContactDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEDF802218729E8008B477E /* ContactDetailsVC.swift */; };
+		2DEDF80521874D25008B477E /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEDF80421874D25008B477E /* Themes.swift */; };
 		B34AA3F30CFB29557AAE0724 /* Pods_VIOCalling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0126EC0C31E7C46D15BF1409 /* Pods_VIOCalling.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +67,8 @@
 		2DE060BF215E2F3A00B8252E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2DE060C1215E2F4B00B8252E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		2DE060C3215E2F5300B8252E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		2DEDF802218729E8008B477E /* ContactDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailsVC.swift; sourceTree = "<group>"; };
+		2DEDF80421874D25008B477E /* Themes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
 		96ECA5817FDBDFADF1F7EBAA /* Pods-VIO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VIO.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VIO/Pods-VIO.debug.xcconfig"; sourceTree = "<group>"; };
 		EA292BF544D0538D4DFB0076 /* Pods-VIOCalling.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VIOCalling.release.xcconfig"; path = "Pods/Target Support Files/Pods-VIOCalling/Pods-VIOCalling.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -149,6 +153,7 @@
 			children = (
 				2D95CA43216B7FBF001EE58F /* VideoVC.swift */,
 				2DDA84A2218343FF000FBDE5 /* ContactVC.swift */,
+				2DEDF802218729E8008B477E /* ContactDetailsVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -202,6 +207,7 @@
 				2DA40A63215B55AC0093B97C /* Utile.swift */,
 				2D74D6D221625F91006A1F51 /* BaseVC.swift */,
 				2DDB1B9D21677C36002250CC /* Constants.swift */,
+				2DEDF80421874D25008B477E /* Themes.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -374,8 +380,10 @@
 				2DDAADDB215A3F6A00175097 /* VIO.xcdatamodeld in Sources */,
 				2D74D6D321625F91006A1F51 /* BaseVC.swift in Sources */,
 				2DDA84A8218352D6000FBDE5 /* Contact.swift in Sources */,
+				2DEDF803218729E8008B477E /* ContactDetailsVC.swift in Sources */,
 				2D95CA44216B7FBF001EE58F /* VideoVC.swift in Sources */,
 				2D04DAA1215CDBA2002E1FC0 /* AFWrapper.swift in Sources */,
+				2DEDF80521874D25008B477E /* Themes.swift in Sources */,
 				2DDAADD3215A3F6A00175097 /* AppDelegate.swift in Sources */,
 				2DDB1B9E21677C36002250CC /* Constants.swift in Sources */,
 			);

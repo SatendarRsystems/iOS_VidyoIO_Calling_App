@@ -75,6 +75,7 @@
                                 <connections>
                                     <outlet property="imgContact" destination="bSa-au-x3i" id="uWS-Pe-wFM"/>
                                     <outlet property="lblName" destination="hI7-wk-IoP" id="zrN-GN-4D7"/>
+                                    <segue destination="6vB-fM-89i" kind="show" id="tGQ-fT-bvM"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -88,6 +89,170 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w4e-pr-UIV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4644" y="103.89805097451276"/>
+        </scene>
+        <!--Contact DetailsVC-->
+        <scene sceneID="noS-UT-aTi">
+            <objects>
+                <viewController id="6vB-fM-89i" customClass="ContactDetailsVC" customModule="VIOCalling" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zjW-ET-KSz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="moT-Co-Q1X">
+                                <rect key="frame" x="20" y="64" width="335" height="554"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xwJ-nK-DlS">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="191"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cmk-xQ-odJ">
+                                                <rect key="frame" x="117" y="20" width="100" height="100"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="LyK-Wn-MkX"/>
+                                                    <constraint firstAttribute="height" constant="100" id="Q7X-5M-oPs"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="50"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sarah" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sqg-Ia-13u">
+                                                <rect key="frame" x="145.5" y="125" width="44.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43V-V8-MVk">
+                                                <rect key="frame" x="118.5" y="150.5" width="98.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="43V-V8-MVk" firstAttribute="top" secondItem="sqg-Ia-13u" secondAttribute="bottom" constant="5" id="6V2-NQ-SjQ"/>
+                                            <constraint firstAttribute="height" constant="191" id="DBI-Da-4Sp"/>
+                                            <constraint firstAttribute="bottom" secondItem="43V-V8-MVk" secondAttribute="bottom" constant="20" id="JW7-9f-dEk"/>
+                                            <constraint firstItem="sqg-Ia-13u" firstAttribute="top" secondItem="Cmk-xQ-odJ" secondAttribute="bottom" constant="5" id="NZm-hF-KbZ"/>
+                                            <constraint firstItem="sqg-Ia-13u" firstAttribute="centerX" secondItem="xwJ-nK-DlS" secondAttribute="centerX" id="Wrt-tv-Obv"/>
+                                            <constraint firstItem="Cmk-xQ-odJ" firstAttribute="top" secondItem="xwJ-nK-DlS" secondAttribute="top" constant="20" id="Yeh-X5-TzI"/>
+                                            <constraint firstItem="Cmk-xQ-odJ" firstAttribute="centerX" secondItem="xwJ-nK-DlS" secondAttribute="centerX" id="iYq-G1-9dE"/>
+                                            <constraint firstItem="43V-V8-MVk" firstAttribute="centerX" secondItem="xwJ-nK-DlS" secondAttribute="centerX" id="sXB-l5-NBr"/>
+                                        </constraints>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fsA-uz-fkY">
+                                        <rect key="frame" x="0.0" y="201" width="335" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Turn off my camera" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="plU-vO-UiA">
+                                                <rect key="frame" x="0.0" y="0.0" width="286" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.054901960780000002" green="0.41960784309999999" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="896-2b-ppR">
+                                                <rect key="frame" x="286" y="0.0" width="51" height="20.5"/>
+                                                <connections>
+                                                    <action selector="clickedSwitchCamera:" destination="6vB-fM-89i" eventType="touchUpInside" id="ufp-Kd-nbg"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GSt-EW-kSb">
+                                        <rect key="frame" x="0.0" y="231.5" width="335" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mute my microphone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lpm-xQ-7gI">
+                                                <rect key="frame" x="0.0" y="0.0" width="286" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.054901960780000002" green="0.41960784309999999" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="WbW-Za-KGy">
+                                                <rect key="frame" x="286" y="0.0" width="51" height="20.5"/>
+                                                <connections>
+                                                    <action selector="clickedSwitchMicrophone:" destination="6vB-fM-89i" eventType="touchUpInside" id="YkW-HN-MVQ"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbs-p8-ikz">
+                                        <rect key="frame" x="0.0" y="262" width="335" height="10"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="10" id="Jxo-3Q-aUG"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oSb-hv-EKX">
+                                        <rect key="frame" x="0.0" y="282" width="335" height="44"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="m2o-D8-T06"/>
+                                        </constraints>
+                                        <state key="normal" title="Call"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="clickedBtnCall:" destination="6vB-fM-89i" eventType="touchUpInside" id="lxR-Dh-aAP"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZk-RC-ms4">
+                                        <rect key="frame" x="0.0" y="336" width="335" height="30"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="pih-8B-juV"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Slx-gR-YMm">
+                                        <rect key="frame" x="0.0" y="376" width="335" height="25"/>
+                                        <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="(614) 999-9999" image="call_icon">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="clickedBtnPhone:" destination="6vB-fM-89i" eventType="touchUpInside" id="gh1-dJ-t5J"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IKm-Rf-wrb">
+                                        <rect key="frame" x="0.0" y="411" width="335" height="25"/>
+                                        <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="mail@work.com" image="mail_icon">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="clickedBtnMail:" destination="6vB-fM-89i" eventType="touchUpInside" id="iQf-46-Qqc"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3SU-5z-1Nu">
+                                        <rect key="frame" x="0.0" y="446" width="335" height="108"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="jKN-P4-ZOR" firstAttribute="trailing" secondItem="moT-Co-Q1X" secondAttribute="trailing" constant="20" id="5gD-xK-q8c"/>
+                            <constraint firstItem="moT-Co-Q1X" firstAttribute="top" secondItem="jKN-P4-ZOR" secondAttribute="top" id="82R-X8-V4S"/>
+                            <constraint firstItem="moT-Co-Q1X" firstAttribute="leading" secondItem="jKN-P4-ZOR" secondAttribute="leading" constant="20" id="DG9-MI-w28"/>
+                            <constraint firstItem="jKN-P4-ZOR" firstAttribute="bottom" secondItem="moT-Co-Q1X" secondAttribute="bottom" id="iPD-xp-37G"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="jKN-P4-ZOR"/>
+                    </view>
+                    <connections>
+                        <outlet property="btnCall" destination="oSb-hv-EKX" id="SSA-5h-kPH"/>
+                        <outlet property="imgViewContact" destination="Cmk-xQ-odJ" id="ywC-G6-fRX"/>
+                        <outlet property="lblContactName" destination="sqg-Ia-13u" id="me1-xf-13x"/>
+                        <outlet property="switchCamera" destination="896-2b-ppR" id="w5t-IK-oSL"/>
+                        <outlet property="switchMicrophone" destination="WbW-Za-KGy" id="3G2-V1-n3X"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2J1-Vw-uss" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5434" y="104"/>
         </scene>
         <!--VideoVC-->
         <scene sceneID="ogV-fk-bOV">
@@ -201,10 +366,6 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qbI-hM-Nmc">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.054901960780000002" green="0.41960784309999999" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -236,8 +397,10 @@
     </scenes>
     <resources>
         <image name="CameraOn" width="70" height="70"/>
+        <image name="call_icon" width="25" height="25"/>
         <image name="cameraSwitch" width="70" height="70"/>
         <image name="chatRounded" width="70" height="70"/>
+        <image name="mail_icon" width="25" height="25"/>
         <image name="micOn" width="70" height="70"/>
     </resources>
 </document>
