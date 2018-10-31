@@ -12,26 +12,26 @@ import Foundation
  
 /* For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
-public class Data {
-	public var name : String?
-	public var profilePic : String?
+public class InitiateCallBase {
+	public var success : Bool?
+	public var message : String?
 
 /**
     Returns an array of models based on given dictionary.
     
     Sample usage:
-    let data_list = Data.modelsFromDictionaryArray(someDictionaryArrayFromJSON)
+    let json4Swift_Base_list = InitiateCallBase.modelsFromDictionaryArray(someDictionaryArrayFromJSON)
 
     - parameter array:  NSArray from JSON dictionary.
 
-    - returns: Array of Data Instances.
+    - returns: Array of InitiateCallBase Instances.
 */
-    public class func modelsFromDictionaryArray(array:NSArray) -> [Data]
+    public class func modelsFromDictionaryArray(array:NSArray) -> [InitiateCallBase]
     {
-        var models:[Data] = []
+        var models:[InitiateCallBase] = []
         for item in array
         {
-            models.append(Data(dictionary: item as! NSDictionary)!)
+            models.append(InitiateCallBase(dictionary: item as! NSDictionary)!)
         }
         return models
     }
@@ -40,16 +40,16 @@ public class Data {
     Constructs the object based on the given dictionary.
     
     Sample usage:
-    let data = Data(someDictionaryFromJSON)
+    let InitiateCallBase = InitiateCallBase(someDictionaryFromJSON)
 
     - parameter dictionary:  NSDictionary from JSON.
 
-    - returns: Data Instance.
+    - returns: InitiateCallBase Instance.
 */
 	required public init?(dictionary: NSDictionary) {
 
-		name = dictionary["name"] as? String
-		profilePic = dictionary["profilePic"] as? String
+		success = dictionary["success"] as? Bool
+		message = dictionary["message"] as? String
 	}
 
 		
@@ -62,8 +62,8 @@ public class Data {
 
 		let dictionary = NSMutableDictionary()
 
-		dictionary.setValue(self.name, forKey: "name")
-		dictionary.setValue(self.profilePic, forKey: "profilePic")
+		dictionary.setValue(self.success, forKey: "success")
+		dictionary.setValue(self.message, forKey: "message")
 
 		return dictionary
 	}

@@ -132,14 +132,12 @@ class ContactVC: UITableViewController {
             
             let dataBase = ContactBase.init(dictionary: resJson.dictionaryObject! as NSDictionary)
             
-            if let arrContactData = dataBase?.data {
+            if dataBase?.success == true, let arrContactData = dataBase?.data {
                 self.arrContacts = arrContactData
                 os_log("data-----------------%@", log: .default, type: .debug,  self.arrContacts)
                 
                 self.tableView.reloadData()
-            }
-            
-            
+            }            
             
         }) {
             (error) -> Void in

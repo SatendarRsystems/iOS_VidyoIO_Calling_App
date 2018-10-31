@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class ContactDetailsVC: UIViewController {
     @IBOutlet weak var imgViewContact: UIImageView!
@@ -70,7 +71,27 @@ class ContactDetailsVC: UIViewController {
         enableDisableCallBtn()
     }
     @IBAction func clickedBtnCall(_ sender: UIButton) {
+        
+        var dicParam: [String : String] = [:]
+        dicParam["displayName"] = "Arun"
+        dicParam["eventName"] = "Anil"
+        dicParam["resourceId"] = "123"
+//        os_log("dicParam-----------------%@", log: .default, type: .debug,  dicParam)
+        AFWrapper.requestPostInitiateCall(params: dicParam as [String : AnyObject], success: {
+            (resJson) -> Void in
+            
+            let resModel = InitiateCallBase.init(dictionary: resJson.dictionaryObject! as NSDictionary)
+            if resModel?.success == true {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "OutgoingCallVC")
+                self.navigationController?.present(vc, animated: true, completion: nil)
+            }
+
+        }, failure: {
+            (error) -> Void in
+        })        
     }
+    
     @IBAction func clickedBtnPhone(_ sender: UIButton) {
     }
     @IBAction func clickedBtnMail(_ sender: UIButton) {

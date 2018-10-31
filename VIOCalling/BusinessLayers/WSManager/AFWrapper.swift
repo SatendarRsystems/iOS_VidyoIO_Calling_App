@@ -13,6 +13,7 @@ import Foundation
 import UIKit
 import Alamofire
 import SwiftyJSON
+import os.log
 
 class AFWrapper {
     static let baseUrl = "https://us-central1-vidyo-1.cloudfunctions.net"
@@ -24,7 +25,7 @@ class AFWrapper {
         
         let oauthHeaders: HTTPHeaders = [
 //            "authorization": UserDefaults.standard.string(forKey: "oauthToken")!,
-            "accept": "application/json"
+            "accept": "application/json",
         ]
         return oauthHeaders
     }
@@ -34,25 +35,24 @@ class AFWrapper {
     /**
      A method to  request the API through GET or POST method
      */
-    class func requestURL(_ strURL: String ,params : [String : AnyObject]?, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+    class func requestURL(_ strURL: String ,params : [String : AnyObject]?, method: HTTPMethod, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         
         let oauthHeaders = self.getoAuthHeaders()
         
         Utile.showProgressIndicator()
+        os_log("strURL-----------------%@", log: .default, type: .debug,  strURL)
         
-        print("strURL: \(strURL)")
-        
-        Alamofire.request(strURL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: oauthHeaders).validate().responseJSON { (responseObject) -> Void in
+        Alamofire.request(strURL, method: method, parameters: params, encoding: JSONEncoding.default, headers: oauthHeaders).validate().responseJSON { (responseObject) -> Void in
             
             Utile.hideProgressIndicator()
             
             if responseObject.result.isSuccess {
                 let resJson = JSON(responseObject.result.value!)
-//                 print("resJson: \(resJson)")
+                os_log("resJson-----------------%@", log: .default, type: .debug, String(describing: resJson))
                 success(resJson)
             }
             else if responseObject.result.isFailure {
-//                print("error: \(responseObject.result.error?.localizedDescription)")
+                os_log("error-----------------%@", log: .default, type: .debug,  (responseObject.result.error?.localizedDescription)!)
                 failure(responseObject.result.error!)
             }
         }
@@ -69,18 +69,18 @@ class AFWrapper {
 
         let resultStr = baseUrl + requestUrl
         
-        AFWrapper.requestURL(resultStr,params: params, success: {
+        AFWrapper.requestURL(resultStr, params: params, method: .get, success: {
             (resJson) -> Void in
-            
             success(resJson)
-        }) {
+            
+        }, failure: {
             (error) -> Void in
             failure(error)
-        }
+        })
     }
     
     /**
-     A method to  request the contact list through GET method
+     A method to  get contact list data
      */
     class func requestGetContacts(params : [String : AnyObject]?, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         
@@ -88,13 +88,32 @@ class AFWrapper {
         
         let resultStr = baseUrl + requestUrl
         
-        AFWrapper.requestURL(resultStr,params: params, success: {
+        AFWrapper.requestURL(resultStr, params: params, method: .get, success: {
             (resJson) -> Void in
-            
             success(resJson)
-        }) {
+            
+        }, failure: {
             (error) -> Void in
             failure(error)
-        }
+        })
+    }
+    
+    /**
+     A method to post data for call initiating
+     */
+    class func requestPostInitiateCall(params : [String : AnyObject]?, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        
+        let requestUrl = String.init(format: "/initiateCall")
+        
+        let resultStr = baseUrl + requestUrl
+        
+        AFWrapper.requestURL(resultStr, params: params, method: .post, success: {
+            (resJson) -> Void in
+            success(resJson)
+
+        }, failure: {
+            (error) -> Void in
+            failure(error)
+        })
     }
 }
