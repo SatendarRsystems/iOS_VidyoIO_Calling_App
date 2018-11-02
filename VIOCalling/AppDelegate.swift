@@ -12,18 +12,72 @@
 import UIKit
 import CoreData
 import IQKeyboardManagerSwift
+import os.log
+import PushNotifications
+import PusherSwift
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, PusherDelegate {
 
     var window: UIWindow?
-
+//    let pushNotifications = PushNotifications.shared
+    var pusher: Pusher!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
          IQKeyboardManager.sharedManager().enable = true
         let themes = Themes()
         themes.initAppearance()
+/*
+        //Initialize PusherBeams
+        self.pushNotifications.start(instanceId: "2286fa9c-aee0-417e-b360-bc54a961792e")
+        self.pushNotifications.registerForRemoteNotifications()
+        try? self.pushNotifications.subscribe(interest: "hello")
+*/
+        //Create pusher connection
+        let options = PusherClientOptions(
+            host: .cluster("ap2")
+        )
+
+        pusher = Pusher(key: "3fc75030bf0f36d2bd3f", options: options)
+//        pusher.delegate = self
+        pusher.connection.delegate = self
+        pusher.connect()
+        
+        //Subscribe pusher public channel
+        let myChannel = pusher.subscribe("vidyoChannel")
+        
+        let _ = pusher.bind({ (message: Any?) in
+            os_log("message:- %{public}@", log: .default, type: .debug, String(describing: message))
+
+            if let message = message as? [String: AnyObject], let eventName = message["event"] as? String, eventName == "pusher:error" {
+                if let data = message["data"] as? [String: AnyObject], let errorMessage = data["message"] as? String {
+                    os_log("errorMessage:- %{public}@", log: .default, type: .debug, errorMessage)
+                }
+            }
+        })
+        
+        let _ = myChannel.bind(eventName: "my-event", callback: { data in
+            os_log("data:- %{public}@", log: .default, type: .debug, String(describing: data))
+            
+            if let data = data as? [String : AnyObject] {
+                
+                if let resourceId = data["resourceId"] as? String {
+                    Utile.saveMeetingID(resourceId)
+                }
+                
+                if let type = data["type"] as? String, let displayName = data["displayName"] as? String, type.isEqual("initiateCall") {
+                    self.displayIncomingCallVC(contactName: displayName)
+                } else if let type = data["type"] as? String, let isAccept = data["isAccept"] as? Bool, type.isEqual("acceptRejectCall") {
+                    
+                    if isAccept == true {
+                        
+                    } else {
+                        
+                    }
+                }
+            }
+        })
         
         return true
     }
@@ -102,27 +156,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+/*
+    // MARK: - APNS Integration
     
-    /**
-     A method to display home (ParticipantsVC) screen after successfull logout
-     */
-    func loginToHomeVC() {
-        UIView.transition(with: window!, duration: 0.3, options: .transitionFlipFromLeft, animations: {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)            
-            let nvc = storyboard.instantiateViewController(withIdentifier: "ParticipantsNVC") as! UINavigationController
-            self.window?.rootViewController = nvc
-        }, completion: nil)
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        os_log("deviceToken:- %@", log: .default, type: .debug, String(describing: deviceToken))
+        self.pushNotifications.registerDeviceToken(deviceToken)
     }
     
-    /**
-     A method to display JoinMeetingVC screen after successfull login
-     */
-    func logoutToHomeVC() {
-        UIView.transition(with: window!, duration: 0.3, options: .transitionFlipFromRight, animations: {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        os_log("userInfo:- %{public}@", log: .default, type: .debug,  userInfo)
+
+        self.pushNotifications.handleNotification(userInfo: userInfo)
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        os_log("error:- %@", log: .default, type: .debug,  error.localizedDescription)
+    }
+ */
+    
+    func changedConnectionState(from old: ConnectionState, to new: ConnectionState) {
+        os_log("old:- %{public}@", log: .default, type: .debug, old.stringValue())
+        os_log("new:- %{public}@", log: .default, type: .debug, new.stringValue())
+    }
+    
+    func debugLog(message: String) {
+        os_log("message:- %{public}@", log: .default, type: .debug, message)
+    }
+    
+    func subscribedToChannel(name: String) {
+        os_log("name:- %{public}@", log: .default, type: .debug, name)
+    }
+    
+    func failedToSubscribeToChannel(name: String, response: URLResponse?, data: String?, error: NSError?) {
+        os_log("error:- %{public}@", log: .default, type: .debug, (error?.localizedDescription)!)
+    }
+    
+    // MARK: - Dispaly call screen
+    
+    func displayIncomingCallVC(contactName: String) {
+        if let tabBC = window?.rootViewController as? UITabBarController, let navVC = tabBC.viewControllers?[tabBC.selectedIndex] as? UINavigationController, let lastVC = navVC.viewControllers.last {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "JoinMeetingVC")
-            self.window?.rootViewController = vc
-        }, completion: nil)
+            let incomingCallVC = storyboard.instantiateViewController(withIdentifier: "IncomingCallVC") as! IncomingCallVC
+            incomingCallVC.strContactName = contactName
+            lastVC.present(incomingCallVC, animated: true, completion: nil)
+        }
     }
 }
-

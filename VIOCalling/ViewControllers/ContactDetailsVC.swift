@@ -29,18 +29,6 @@ class ContactDetailsVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    /**
-     A method to initialize basic view of this screen.
-     */
-    func initView() {
-        imgViewContact.layer.masksToBounds = true
-        lblContactName.text = crtContact.name
-        
-        if let url = URL(string: crtContact.profilePic!) {
-            imgViewContact.af_setImage(withURL: url)
-        }
-    }    
 
     /*
     // MARK: - Navigation
@@ -52,7 +40,21 @@ class ContactDetailsVC: UIViewController {
     }
     */
     
-    func enableDisableCallBtn() {
+    //MARK: - Private
+    
+    /**
+     A method to initialize basic view of this screen.
+     */
+    private func initView() {
+        imgViewContact.layer.masksToBounds = true
+        lblContactName.text = crtContact.name
+        
+        if let url = URL(string: crtContact.profilePic!) {
+            imgViewContact.af_setImage(withURL: url)
+        }
+    }
+    
+    private func enableDisableCallBtn() {
         if switchCamera.isOn == false, switchMicrophone.isOn == false {
             btnCall.isEnabled = false
             btnCall.alpha = 0.5
@@ -74,26 +76,34 @@ class ContactDetailsVC: UIViewController {
         
         var dicParam: [String : String] = [:]
         dicParam["displayName"] = "Arun"
-        dicParam["eventName"] = "Anil"
+        dicParam["eventName"] = "my-event"
         dicParam["resourceId"] = "123"
-//        os_log("dicParam-----------------%@", log: .default, type: .debug,  dicParam)
-        AFWrapper.requestPostInitiateCall(params: dicParam as [String : AnyObject], success: {
-            (resJson) -> Void in
-            
-            let resModel = InitiateCallBase.init(dictionary: resJson.dictionaryObject! as NSDictionary)
-            if resModel?.success == true {
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "OutgoingCallVC")
-                self.navigationController?.present(vc, animated: true, completion: nil)
-            }
-
-        }, failure: {
-            (error) -> Void in
-        })        
+//        os_log("dicParam:- %@", log: .default, type: .debug,  dicParam)
+        
+        requesPostInitiateCall(params: dicParam as [String : AnyObject])
     }
     
     @IBAction func clickedBtnPhone(_ sender: UIButton) {
     }
     @IBAction func clickedBtnMail(_ sender: UIButton) {
+    }
+    
+    //MARK: - API calls
+    
+    private func requesPostInitiateCall(params: [String : AnyObject]) {
+        AFWrapper.requestPostInitiateCall(params: params, success: {
+            (resJson) -> Void in
+            
+            let resModel = InitiateCallBase.init(dictionary: resJson.dictionaryObject! as NSDictionary)
+            if resModel?.success == true {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "OutgoingCallVC") as! OutgoingCallVC
+                vc.strContactName = self.crtContact.name
+                self.navigationController?.present(vc, animated: true, completion: nil)
+            }
+            
+        }, failure: {
+            (error) -> Void in
+        })
     }
 }

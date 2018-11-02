@@ -9,16 +9,19 @@
 import UIKit
 
 class OutgoingCallVC: UIViewController {
-
+    @IBOutlet weak var lblContactName: UILabel!
+    var strContactName: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        initView()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        // Dispose of any resources that can be recreated.        
     }
     
 
@@ -31,6 +34,17 @@ class OutgoingCallVC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    //MARK: - Private
+    
+    /**
+     A method to initialize basic view of this screen.
+     */
+    func initView() {
+        lblContactName.text = strContactName
+    }
+    
+    //MARK: - Actions
 
     @IBAction func clickBtnCancel(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)

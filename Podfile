@@ -10,5 +10,7 @@ target 'VIOCalling' do
   pod 'AlamofireImage', '~> 3.4.1'
   pod 'IQKeyboardManagerSwift', '5.0.7'
   pod 'SwiftyJSON', '~> 4.2.0'
+  pod 'PushNotifications'
+  pod 'PusherSwift', '~> 5.0'
 
 end

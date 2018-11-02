@@ -32,13 +32,6 @@ class ContactVC: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    /**
-     A method to initialize basic view of this screen.
-     */
-    func initView() {
-        self.requesGetContacts()
-    }
 
     // MARK: - Table view data source
     
@@ -122,6 +115,14 @@ class ContactVC: UITableViewController {
         }        
     }
     
+    //MARK: - Private
+    
+    /**
+     A method to initialize basic view of this screen.
+     */
+    private func initView() {
+        self.requesGetContacts()
+    }    
     
     //MARK: - API calls
     
@@ -134,7 +135,7 @@ class ContactVC: UITableViewController {
             
             if dataBase?.success == true, let arrContactData = dataBase?.data {
                 self.arrContacts = arrContactData
-                os_log("data-----------------%@", log: .default, type: .debug,  self.arrContacts)
+                //                os_log("data:- %@", log: .default, type: .debug,  self.arrContacts)
                 
                 self.tableView.reloadData()
             }            
@@ -145,5 +146,4 @@ class ContactVC: UITableViewController {
             self.alert(message: error.localizedDescription)
         }
     }
-
 }

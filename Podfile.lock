@@ -3,27 +3,35 @@ PODS:
   - AlamofireImage (3.4.1):
     - Alamofire (~> 4.7)
   - IQKeyboardManagerSwift (5.0.7)
+  - PusherSwift (5.1.1)
+  - PushNotifications (1.1.0)
   - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.7)
-  - AlamofireImage (~> 3.4)
+  - Alamofire (~> 4.7.3)
+  - AlamofireImage (~> 3.4.1)
   - IQKeyboardManagerSwift (= 5.0.7)
-  - SwiftyJSON
+  - PusherSwift (~> 5.0)
+  - PushNotifications
+  - SwiftyJSON (~> 4.2.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - AlamofireImage
     - IQKeyboardManagerSwift
+    - PusherSwift
+    - PushNotifications
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
   IQKeyboardManagerSwift: 30fb3a61de1af53a95e02b80fb54ed0a19d5ede5
+  PusherSwift: de9238b6b9faec5275d452e5f43ce9c82b78731e
+  PushNotifications: 8eee2fb66f3870025fe037883c88f5861f315bd0
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: f9cdea5a82717da00a7efe86c7b3d88d2fbb7cf8
+PODFILE CHECKSUM: 8cb3293fa4aa83cd53abfe11834e09765a6973fc
 
 COCOAPODS: 1.5.3

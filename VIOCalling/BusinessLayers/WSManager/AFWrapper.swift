@@ -40,7 +40,7 @@ class AFWrapper {
         let oauthHeaders = self.getoAuthHeaders()
         
         Utile.showProgressIndicator()
-        os_log("strURL-----------------%@", log: .default, type: .debug,  strURL)
+        os_log("strURL:- %@", log: .default, type: .debug,  strURL)
         
         Alamofire.request(strURL, method: method, parameters: params, encoding: JSONEncoding.default, headers: oauthHeaders).validate().responseJSON { (responseObject) -> Void in
             
@@ -48,11 +48,11 @@ class AFWrapper {
             
             if responseObject.result.isSuccess {
                 let resJson = JSON(responseObject.result.value!)
-                os_log("resJson-----------------%@", log: .default, type: .debug, String(describing: resJson))
+//                os_log("resJson:- %{public}@", log: .default, type: .debug, String(describing: resJson))
                 success(resJson)
             }
             else if responseObject.result.isFailure {
-                os_log("error-----------------%@", log: .default, type: .debug,  (responseObject.result.error?.localizedDescription)!)
+                os_log("error:- %@", log: .default, type: .debug,  (responseObject.result.error?.localizedDescription)!)
                 failure(responseObject.result.error!)
             }
         }
@@ -111,6 +111,25 @@ class AFWrapper {
             (resJson) -> Void in
             success(resJson)
 
+        }, failure: {
+            (error) -> Void in
+            failure(error)
+        })
+    }
+    
+    /**
+     A method to post data for accept/reject call
+     */
+    class func requestPostAcceptRejectCall(params : [String : AnyObject]?, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        
+        let requestUrl = String.init(format: "/acceptRejectCall")
+        
+        let resultStr = baseUrl + requestUrl
+        
+        AFWrapper.requestURL(resultStr, params: params, method: .post, success: {
+            (resJson) -> Void in
+            success(resJson)
+            
         }, failure: {
             (error) -> Void in
             failure(error)
