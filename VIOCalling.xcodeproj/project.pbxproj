@@ -12,6 +12,7 @@
 		2D04DAA8215D06D9002E1FC0 /* AccessTokenBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D04DAA7215D06D9002E1FC0 /* AccessTokenBase.swift */; };
 		2D74D6D121625BFF006A1F51 /* VidyoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D74D6D021625BFF006A1F51 /* VidyoManager.swift */; };
 		2D74D6D321625F91006A1F51 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D74D6D221625F91006A1F51 /* BaseVC.swift */; };
+		2D817334219963C100D210E0 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D817333219963C100D210E0 /* LoginVC.swift */; };
 		2D95CA44216B7FBF001EE58F /* VideoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D95CA43216B7FBF001EE58F /* VideoVC.swift */; };
 		2DA40A64215B55AC0093B97C /* Utile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA40A63215B55AC0093B97C /* Utile.swift */; };
 		2DAE7392216F726C000E7015 /* VidyoClientIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DE060B5215E132900B8252E /* VidyoClientIOS.framework */; };
@@ -48,6 +49,7 @@
 		2D04DAA7215D06D9002E1FC0 /* AccessTokenBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessTokenBase.swift; sourceTree = "<group>"; };
 		2D74D6D021625BFF006A1F51 /* VidyoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VidyoManager.swift; sourceTree = "<group>"; };
 		2D74D6D221625F91006A1F51 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
+		2D817333219963C100D210E0 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		2D95CA43216B7FBF001EE58F /* VideoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoVC.swift; sourceTree = "<group>"; };
 		2DA40A63215B55AC0093B97C /* Utile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utile.swift; sourceTree = "<group>"; };
 		2DD86046218C607B009CE788 /* IncomingCallVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingCallVC.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				2DEDF802218729E8008B477E /* ContactDetailsVC.swift */,
 				2DDC4960218844BE00C39084 /* OutgoingCallVC.swift */,
 				2DD86046218C607B009CE788 /* IncomingCallVC.swift */,
+				2D817333219963C100D210E0 /* LoginVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				2DEDF803218729E8008B477E /* ContactDetailsVC.swift in Sources */,
 				2D95CA44216B7FBF001EE58F /* VideoVC.swift in Sources */,
 				2DD86047218C607B009CE788 /* IncomingCallVC.swift in Sources */,
+				2D817334219963C100D210E0 /* LoginVC.swift in Sources */,
 				2D04DAA1215CDBA2002E1FC0 /* AFWrapper.swift in Sources */,
 				2DE4C6DB21898C5800DC8675 /* InitiateCallBase.swift in Sources */,
 				2DEDF80521874D25008B477E /* Themes.swift in Sources */,

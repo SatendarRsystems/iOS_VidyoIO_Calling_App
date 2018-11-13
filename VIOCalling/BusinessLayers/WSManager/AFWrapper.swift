@@ -35,11 +35,14 @@ class AFWrapper {
     /**
      A method to  request the API through GET or POST method
      */
-    class func requestURL(_ strURL: String ,params : [String : AnyObject]?, method: HTTPMethod, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+    class func requestURL(_ strURL: String ,params : [String : AnyObject]?, method: HTTPMethod, showActivity: Bool, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         
         let oauthHeaders = self.getoAuthHeaders()
         
-        Utile.showProgressIndicator()
+        if showActivity {
+            Utile.showProgressIndicator()
+        }
+        
         os_log("strURL:- %@", log: .default, type: .debug,  strURL)
         
         Alamofire.request(strURL, method: method, parameters: params, encoding: JSONEncoding.default, headers: oauthHeaders).validate().responseJSON { (responseObject) -> Void in
@@ -69,7 +72,7 @@ class AFWrapper {
 
         let resultStr = baseUrl + requestUrl
         
-        AFWrapper.requestURL(resultStr, params: params, method: .get, success: {
+        AFWrapper.requestURL(resultStr, params: params, method: .get, showActivity: true, success: {
             (resJson) -> Void in
             success(resJson)
             
@@ -88,7 +91,7 @@ class AFWrapper {
         
         let resultStr = baseUrl + requestUrl
         
-        AFWrapper.requestURL(resultStr, params: params, method: .get, success: {
+        AFWrapper.requestURL(resultStr, params: params, method: .get, showActivity: true, success: {
             (resJson) -> Void in
             success(resJson)
             
@@ -107,7 +110,7 @@ class AFWrapper {
         
         let resultStr = baseUrl + requestUrl
         
-        AFWrapper.requestURL(resultStr, params: params, method: .post, success: {
+        AFWrapper.requestURL(resultStr, params: params, method: .post, showActivity: true, success: {
             (resJson) -> Void in
             success(resJson)
 
@@ -120,13 +123,32 @@ class AFWrapper {
     /**
      A method to post data for accept/reject call
      */
-    class func requestPostAcceptRejectCall(params : [String : AnyObject]?, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+    class func requestPostAcceptRejectCall(params : [String : AnyObject]?, showActivity: Bool, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
         
         let requestUrl = String.init(format: "/acceptRejectCall")
         
         let resultStr = baseUrl + requestUrl
         
-        AFWrapper.requestURL(resultStr, params: params, method: .post, success: {
+        AFWrapper.requestURL(resultStr, params: params, method: .post, showActivity: showActivity,  success: {
+            (resJson) -> Void in
+            success(resJson)
+            
+        }, failure: {
+            (error) -> Void in
+            failure(error)
+        })
+    }
+    
+    /**
+     A method to post data for call ending
+     */
+    class func requestPostCallEnded(params : [String : AnyObject]?, showActivity: Bool, success:@escaping (JSON) -> Void, failure:@escaping (Error) -> Void) {
+        
+        let requestUrl = String.init(format: "/callEnded")
+        
+        let resultStr = baseUrl + requestUrl
+        
+        AFWrapper.requestURL(resultStr, params: params, method: .post, showActivity: showActivity,  success: {
             (resJson) -> Void in
             success(resJson)
             

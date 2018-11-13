@@ -12,7 +12,7 @@
 
 import UIKit
 
-class VidyoManager: NSObject {
+class VidyoManager: NSObject, VCConnectorIConnect {
     static let sharedInstance = VidyoManager()
     static var connector:VCConnector?
     let videoView: UIView!
@@ -56,12 +56,12 @@ class VidyoManager: NSObject {
     /**
      Used to connect video chat meeting
      */
-    func connectMeeting(_ vc: VCConnectorIConnect) {
+    func connectMeeting() {
         VidyoManager.connector?.connect("prod.vidyo.io",
                            token: Utile.getAccessToken(),
                            displayName: Utile.getUserName(),
                            resourceId: Utile.getMeetingID(),
-                           connectorIConnect: vc)
+                           connectorIConnect: self)
     }
     
     /**
@@ -69,7 +69,7 @@ class VidyoManager: NSObject {
      */
     func disconnectMeeting() {
         DispatchQueue.main.async {
-            VidyoManager.connector?.disable()
+            VidyoManager.connector?.disconnect()
             VidyoManager.connector = nil
         }
     }
@@ -120,5 +120,38 @@ class VidyoManager: NSObject {
      */
     func switchCamera() {
          VidyoManager.connector?.cycleCamera()
+    }
+    
+    // MARK: - VCConnectorIConnect delegate
+    
+    func onSuccess() {
+        print("Connection Successful")
+        
+        DispatchQueue.main.async {
+            Utile.hideProgressIndicator()
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.presentVideoVC()
+        }
+    }
+    
+    func onFailure(_ reason: VCConnectorFailReason) {
+        print("Connection failed \(reason)")
+        
+        DispatchQueue.main.async {
+            Utile.hideProgressIndicator()
+            
+            if reason.rawValue == 5 {
+//                self.alert(message: "VCConnectorFailReasonInvalidToken")
+            }
+        }
+    }
+    
+    func onDisconnected(_ reason: VCConnectorDisconnectReason) {
+        print("Call Disconnected")
+        
+//        DispatchQueue.main.async {
+//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//            appDelegate.dismissVideoVC()
+//        }
     }
 }

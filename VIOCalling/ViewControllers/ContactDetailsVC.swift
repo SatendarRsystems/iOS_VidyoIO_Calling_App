@@ -75,9 +75,11 @@ class ContactDetailsVC: UIViewController {
     @IBAction func clickedBtnCall(_ sender: UIButton) {
         
         var dicParam: [String : String] = [:]
-        dicParam["displayName"] = "Arun"
-        dicParam["eventName"] = "my-event"
-        dicParam["resourceId"] = "123"
+        dicParam["displayName"] = Utile.getUserName()
+        dicParam["eventName"] = crtContact.name?.lowercased()
+        let meetingID = "123"
+        Utile.saveMeetingID(meetingID)
+        dicParam["resourceId"] = meetingID
 //        os_log("dicParam:- %@", log: .default, type: .debug,  dicParam)
         
         requesPostInitiateCall(params: dicParam as [String : AnyObject])

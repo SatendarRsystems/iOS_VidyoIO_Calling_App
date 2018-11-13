@@ -28,10 +28,6 @@ class VideoVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        VidyoManager.sharedInstance.switchOffCamera(false)
-        VidyoManager.sharedInstance.switchOffMic(false)
-        VidyoManager.sharedInstance.switchOffSpeaker(false)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -45,11 +41,17 @@ class VideoVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         VidyoManager.sharedInstance.refreshUI()
-
+        
     }
         
     @IBAction func clickedBtnChat(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: {
+            VidyoManager.sharedInstance.disableMeeting()
+        })
+        
+        var dicParam: [String : Any] = [:]
+        dicParam["eventName"] = Utile.getCallerID()
+        fetchPostCallEndedAPI(params: dicParam as [String : AnyObject])
     }
     @IBAction func clickedBtnCameraSwitch(_ sender: UIButton) {        
         VidyoManager.sharedInstance.switchCamera()
@@ -77,5 +79,16 @@ class VideoVC: UIViewController {
             sender.setImage(#imageLiteral(resourceName: "micOn"), for: .normal)
             VidyoManager.sharedInstance.switchOffMic(false)
         }
+    }
+    
+    //MARK: - API calls
+    
+    private func fetchPostCallEndedAPI(params: [String : AnyObject]) {
+        AFWrapper.requestPostCallEnded(params: params, showActivity: false, success: {
+            (resJson) -> Void in
+            
+        }, failure: {
+            (error) -> Void in
+        })
     }
 }

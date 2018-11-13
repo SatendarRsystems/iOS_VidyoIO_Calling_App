@@ -34,50 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PusherDelegate {
         self.pushNotifications.registerForRemoteNotifications()
         try? self.pushNotifications.subscribe(interest: "hello")
 */
-        //Create pusher connection
-        let options = PusherClientOptions(
-            host: .cluster("ap2")
-        )
-
-        pusher = Pusher(key: "3fc75030bf0f36d2bd3f", options: options)
-//        pusher.delegate = self
-        pusher.connection.delegate = self
-        pusher.connect()
         
-        //Subscribe pusher public channel
-        let myChannel = pusher.subscribe("vidyoChannel")
-        
-        let _ = pusher.bind({ (message: Any?) in
-            os_log("message:- %{public}@", log: .default, type: .debug, String(describing: message))
-
-            if let message = message as? [String: AnyObject], let eventName = message["event"] as? String, eventName == "pusher:error" {
-                if let data = message["data"] as? [String: AnyObject], let errorMessage = data["message"] as? String {
-                    os_log("errorMessage:- %{public}@", log: .default, type: .debug, errorMessage)
-                }
-            }
-        })
-        
-        let _ = myChannel.bind(eventName: "my-event", callback: { data in
-            os_log("data:- %{public}@", log: .default, type: .debug, String(describing: data))
-            
-            if let data = data as? [String : AnyObject] {
-                
-                if let resourceId = data["resourceId"] as? String {
-                    Utile.saveMeetingID(resourceId)
-                }
-                
-                if let type = data["type"] as? String, let displayName = data["displayName"] as? String, type.isEqual("initiateCall") {
-                    self.displayIncomingCallVC(contactName: displayName)
-                } else if let type = data["type"] as? String, let isAccept = data["isAccept"] as? Bool, type.isEqual("acceptRejectCall") {
-                    
-                    if isAccept == true {
-                        
-                    } else {
-                        
-                    }
-                }
-            }
-        })
+        initPusherConnection()
         
         return true
     }
@@ -175,6 +133,63 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PusherDelegate {
     }
  */
     
+    // MARK: - Pusher Integration
+    
+    func initPusherConnection() {
+        //Create pusher connection
+        let options = PusherClientOptions(
+            host: .cluster("ap2")
+        )
+        
+        pusher = Pusher(key: "3fc75030bf0f36d2bd3f", options: options)
+//        pusher.delegate = self
+        pusher.connection.delegate = self
+        pusher.connect()
+    }
+    
+    func subscribePublicChannel(with eventName: String ) {
+        let myChannel = pusher.subscribe("vidyoChannel")
+        
+        let _ = pusher.bind({ (message: Any?) in
+            os_log("message:- %{public}@", log: .default, type: .debug, String(describing: message))
+            
+            if let message = message as? [String: AnyObject], let eventName = message["event"] as? String, eventName == "pusher:error" {
+                if let data = message["data"] as? [String: AnyObject], let errorMessage = data["message"] as? String {
+                    os_log("errorMessage:- %{public}@", log: .default, type: .debug, errorMessage)
+                }
+            }
+        })
+        
+        let _ = myChannel.bind(eventName: eventName.lowercased(), callback: { data in
+            os_log("data:- %{public}@", log: .default, type: .debug, String(describing: data))
+            
+            if let data = data as? [String : AnyObject] {
+                
+                if let resourceId = data["resourceId"] as? String {
+                    Utile.saveMeetingID(resourceId)
+                }
+                
+                if let type = data["type"] as? String, let displayName = data["displayName"] as? String, type.isEqual("initiateCall") {
+                    Utile.saveCallerID(displayName)
+                    self.presentIncomingCallVC()
+                } else if let type = data["type"] as? String, let isAccept = data["isAccept"] as? Bool, type.isEqual("acceptRejectCall") {
+                    
+                    if isAccept == true {
+                        VidyoManager.sharedInstance.refreshUI()
+                        VidyoManager.sharedInstance.connectMeeting()
+                        VidyoManager.sharedInstance.switchOffMic(false)
+                        VidyoManager.sharedInstance.switchOffSpeaker(false)
+                        VidyoManager.sharedInstance.switchOffCamera(true)
+                    } else {
+                        self.dismissOutgoingCallVC()
+                    }
+                } else if let type = data["type"] as? String, type.isEqual("callEnded") {
+                    self.dismissVideoVC()
+                }
+            }
+        })
+    }
+    
     func changedConnectionState(from old: ConnectionState, to new: ConnectionState) {
         os_log("old:- %{public}@", log: .default, type: .debug, old.stringValue())
         os_log("new:- %{public}@", log: .default, type: .debug, new.stringValue())
@@ -194,12 +209,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PusherDelegate {
     
     // MARK: - Dispaly call screen
     
-    func displayIncomingCallVC(contactName: String) {
+    /**
+     A method to display home (ParticipantsVC) screen after successfull logout
+     */
+    func loginToHomeVC() {
+        UIView.transition(with: window!, duration: 0.3, options: .transitionFlipFromLeft, animations: {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let tbc = storyboard.instantiateViewController(withIdentifier: "HomeVC") as! UITabBarController
+            self.window?.rootViewController = tbc
+        }, completion: nil)
+    }
+    
+    /**
+     A method to display JoinMeetingVC screen after successfull login
+     */
+    func logoutToHomeVC() {
+        UIView.transition(with: window!, duration: 0.3, options: .transitionFlipFromRight, animations: {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "LoginVC")
+            self.window?.rootViewController = vc
+        }, completion: nil)
+    }
+    
+    func presentIncomingCallVC() {
         if let tabBC = window?.rootViewController as? UITabBarController, let navVC = tabBC.viewControllers?[tabBC.selectedIndex] as? UINavigationController, let lastVC = navVC.viewControllers.last {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let incomingCallVC = storyboard.instantiateViewController(withIdentifier: "IncomingCallVC") as! IncomingCallVC
-            incomingCallVC.strContactName = contactName
+            incomingCallVC.strContactName = Utile.getCallerID()
             lastVC.present(incomingCallVC, animated: true, completion: nil)
+        }
+    }
+    
+    func presentVideoVC() {
+        if let tabBC = window?.rootViewController as? UITabBarController, let navVC = tabBC.viewControllers?[tabBC.selectedIndex] as? UINavigationController, let lastVC = navVC.viewControllers.last {
+            lastVC.dismiss(animated: false, completion: nil)
+            lastVC.present(VidyoManager.videoVC, animated: true, completion: nil)
+        }
+    }
+    
+    func dismissVideoVC() {
+        if let tabBC = window?.rootViewController as? UITabBarController, let navVC = tabBC.viewControllers?[tabBC.selectedIndex] as? UINavigationController, let lastVC = navVC.viewControllers.last {
+            lastVC.dismiss(animated: false, completion: nil)
+        }
+    }
+    
+    func dismissOutgoingCallVC() {
+        if let tabBC = window?.rootViewController as? UITabBarController, let navVC = tabBC.viewControllers?[tabBC.selectedIndex] as? UINavigationController, let lastVC = navVC.viewControllers.last {
+            lastVC.dismiss(animated: true, completion: nil)
         }
     }
 }

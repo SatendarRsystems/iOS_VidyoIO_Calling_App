@@ -95,7 +95,7 @@ class Utile {
     }
     
     /**
-     A method to save user accessb token in local persistance storage
+     A method to save user access token in local persistance storage
      */
     static func saveAccessToken(_ token: String?) {
         
@@ -107,5 +107,20 @@ class Utile {
      */
     static func getAccessToken() -> String? {
         return UserDefaults.standard.string(forKey: "accessToken")
+    }
+    
+    /**
+     A method to save caller ID in local persistance storage
+     */
+    static func saveCallerID(_ token: String?) {
+        
+        UserDefaults.standard.set(token, forKey: "callerID")
+    }
+    
+    /**
+     A method to get caller ID from local persistance storage
+     */
+    static func getCallerID() -> String? {
+        return UserDefaults.standard.string(forKey: "callerID")
     }
 }

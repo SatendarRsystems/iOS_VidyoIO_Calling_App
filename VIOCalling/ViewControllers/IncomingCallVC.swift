@@ -16,6 +16,7 @@ class IncomingCallVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        initView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,29 +35,59 @@ class IncomingCallVC: UIViewController {
     }
     */
     
+    //MARK: - Private
+    
+    /**
+     A method to initialize basic view of this screen.
+     */
+    func initView() {
+        lblContactName.text = strContactName
+    }
+    
     //MARK: - Actions
 
     @IBAction func clickedBtnDecline(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+        
+        var dicParam: [String : Any] = [:]
+        dicParam["eventName"] = strContactName.lowercased()
+        dicParam["isAccept"] = false
+        
+        requesPostRejectCall(params: dicParam as [String : AnyObject])
     }
     @IBAction func clickedBtnAnswer(_ sender: UIButton) {
 //        self.dismiss(animated: true, completion: nil)
         
         var dicParam: [String : Any] = [:]
-        dicParam["eventName"] = strContactName
+        dicParam["eventName"] = strContactName.lowercased()
         dicParam["isAccept"] = true
         
-        requesPostAcceptRejectCall(params: dicParam as [String : AnyObject])
+        requesPostAcceptCall(params: dicParam as [String : AnyObject])
     }
     
     //MARK: - API calls
     
-    private func requesPostAcceptRejectCall(params: [String : AnyObject]) {
-        AFWrapper.requestPostInitiateCall(params: params, success: {
+    private func requesPostAcceptCall(params: [String : AnyObject]) {
+        AFWrapper.requestPostAcceptRejectCall(params: params, showActivity: true, success: {
             (resJson) -> Void in
-                        
+            Utile.showProgressIndicator()
+            VidyoManager.sharedInstance.refreshUI()
+            VidyoManager.sharedInstance.connectMeeting()
+            VidyoManager.sharedInstance.switchOffMic(false)
+            VidyoManager.sharedInstance.switchOffSpeaker(false)
+            VidyoManager.sharedInstance.switchOffCamera(true)
+            
         }, failure: {
             (error) -> Void in
         })
-    }    
+    }
+    
+    private func requesPostRejectCall(params: [String : AnyObject]) {
+        AFWrapper.requestPostAcceptRejectCall(params: params, showActivity: false, success: {
+            (resJson) -> Void in
+            
+        }, failure: {
+            (error) -> Void in
+        })
+    }
 }
