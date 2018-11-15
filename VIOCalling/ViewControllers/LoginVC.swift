@@ -93,7 +93,6 @@ class LoginVC: UIViewController {
             
             let accessTokenBase = AccessTokenBase.init(dictionary: resJson.dictionaryObject! as NSDictionary)
             Utile.saveAccessToken(accessTokenBase?.accessToken)
-            VidyoManager.sharedInstance.initVidyoConnector()
             
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.subscribePublicChannel(with: Utile.getUserName()!)

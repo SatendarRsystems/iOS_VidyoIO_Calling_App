@@ -47,7 +47,9 @@ class AFWrapper {
         
         Alamofire.request(strURL, method: method, parameters: params, encoding: JSONEncoding.default, headers: oauthHeaders).validate().responseJSON { (responseObject) -> Void in
             
-            Utile.hideProgressIndicator()
+            if showActivity {
+                Utile.hideProgressIndicator()
+            }
             
             if responseObject.result.isSuccess {
                 let resJson = JSON(responseObject.result.value!)

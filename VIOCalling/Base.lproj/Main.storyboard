@@ -127,16 +127,16 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fsA-uz-fkY">
-                                        <rect key="frame" x="0.0" y="201" width="335" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="201" width="335" height="31"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Turn off my camera" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="plU-vO-UiA">
-                                                <rect key="frame" x="0.0" y="0.0" width="286" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="286" height="31"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.054901960780000002" green="0.41960784309999999" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="896-2b-ppR">
-                                                <rect key="frame" x="286" y="0.0" width="51" height="20.5"/>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="896-2b-ppR">
+                                                <rect key="frame" x="286" y="0.0" width="51" height="31"/>
                                                 <connections>
                                                     <action selector="clickedSwitchCamera:" destination="6vB-fM-89i" eventType="touchUpInside" id="ufp-Kd-nbg"/>
                                                 </connections>
@@ -144,16 +144,16 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GSt-EW-kSb">
-                                        <rect key="frame" x="0.0" y="231.5" width="335" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="242" width="335" height="31"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mute my microphone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lpm-xQ-7gI">
-                                                <rect key="frame" x="0.0" y="0.0" width="286" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="286" height="31"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.054901960780000002" green="0.41960784309999999" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WbW-Za-KGy">
-                                                <rect key="frame" x="286" y="0.0" width="51" height="20.5"/>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="WbW-Za-KGy">
+                                                <rect key="frame" x="286" y="0.0" width="51" height="31"/>
                                                 <connections>
                                                     <action selector="clickedSwitchMicrophone:" destination="6vB-fM-89i" eventType="touchUpInside" id="YkW-HN-MVQ"/>
                                                 </connections>
@@ -161,14 +161,14 @@
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbs-p8-ikz">
-                                        <rect key="frame" x="0.0" y="262" width="335" height="10"/>
+                                        <rect key="frame" x="0.0" y="283" width="335" height="10"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="10" id="Jxo-3Q-aUG"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oSb-hv-EKX">
-                                        <rect key="frame" x="0.0" y="282" width="335" height="44"/>
+                                        <rect key="frame" x="0.0" y="303" width="335" height="44"/>
                                         <color key="backgroundColor" red="0.50980392159999999" green="0.76470588240000004" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="m2o-D8-T06"/>
@@ -184,15 +184,18 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZk-RC-ms4">
-                                        <rect key="frame" x="0.0" y="336" width="335" height="30"/>
+                                        <rect key="frame" x="0.0" y="357" width="335" height="30"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="pih-8B-juV"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Slx-gR-YMm">
-                                        <rect key="frame" x="0.0" y="376" width="335" height="25"/>
-                                        <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Slx-gR-YMm">
+                                        <rect key="frame" x="0.0" y="397" width="335" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="78n-fn-a9X"/>
+                                        </constraints>
+                                        <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="(614) 999-9999" image="call_icon">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -200,9 +203,12 @@
                                             <action selector="clickedBtnPhone:" destination="6vB-fM-89i" eventType="touchUpInside" id="gh1-dJ-t5J"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IKm-Rf-wrb">
-                                        <rect key="frame" x="0.0" y="411" width="335" height="25"/>
-                                        <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IKm-Rf-wrb">
+                                        <rect key="frame" x="0.0" y="432" width="335" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="Zof-yE-O6O"/>
+                                        </constraints>
+                                        <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="mail@work.com" image="mail_icon">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -211,7 +217,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3SU-5z-1Nu">
-                                        <rect key="frame" x="0.0" y="446" width="335" height="108"/>
+                                        <rect key="frame" x="0.0" y="467" width="335" height="87"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>

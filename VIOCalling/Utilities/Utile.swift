@@ -123,4 +123,34 @@ class Utile {
     static func getCallerID() -> String? {
         return UserDefaults.standard.string(forKey: "callerID")
     }
+    
+    /**
+     A method to save status of camera on/off in local persistance storage
+     */
+    static func saveSwitchOffCamera(_ value: Bool?) {
+        
+        UserDefaults.standard.set(value, forKey: "switchOffCamera")
+    }
+    
+    /**
+     A method to get status of camera on/off from local persistance storage
+     */
+    static func getSwitchOffCamera() -> Bool? {
+        return UserDefaults.standard.bool(forKey: "switchOffCamera")
+    }
+    
+    /**
+     A method to save status of mic on/off in local persistance storage
+     */
+    static func saveSwitchOffMic(_ value: Bool?) {
+        
+        UserDefaults.standard.set(value, forKey: "switchOffMic")
+    }
+    
+    /**
+     A method to get status of mic on/off from local persistance storage
+     */
+    static func getSwitchOffMic() -> Bool? {
+        return UserDefaults.standard.bool(forKey: "switchOffMic")
+    }
 }

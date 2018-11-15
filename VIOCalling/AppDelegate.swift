@@ -34,8 +34,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PusherDelegate {
         self.pushNotifications.registerForRemoteNotifications()
         try? self.pushNotifications.subscribe(interest: "hello")
 */
-        
         initPusherConnection()
+        
+        //Save default values for video calling
+        Utile.saveSwitchOffCamera(true)
+        Utile.saveSwitchOffMic(true)
         
         return true
     }
@@ -175,11 +178,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PusherDelegate {
                 } else if let type = data["type"] as? String, let isAccept = data["isAccept"] as? Bool, type.isEqual("acceptRejectCall") {
                     
                     if isAccept == true {
+                        VidyoManager.sharedInstance.initVidyoConnector()
                         VidyoManager.sharedInstance.refreshUI()
                         VidyoManager.sharedInstance.connectMeeting()
-                        VidyoManager.sharedInstance.switchOffMic(false)
+                        VidyoManager.sharedInstance.switchOffMic(Utile.getSwitchOffMic()!)
                         VidyoManager.sharedInstance.switchOffSpeaker(false)
-                        VidyoManager.sharedInstance.switchOffCamera(true)
+                        VidyoManager.sharedInstance.switchOffCamera(Utile.getSwitchOffCamera()!)
                     } else {
                         self.dismissOutgoingCallVC()
                     }
@@ -189,7 +193,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PusherDelegate {
             }
         })
     }
-    
+/*
     func changedConnectionState(from old: ConnectionState, to new: ConnectionState) {
         os_log("old:- %{public}@", log: .default, type: .debug, old.stringValue())
         os_log("new:- %{public}@", log: .default, type: .debug, new.stringValue())
@@ -206,7 +210,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PusherDelegate {
     func failedToSubscribeToChannel(name: String, response: URLResponse?, data: String?, error: NSError?) {
         os_log("error:- %{public}@", log: .default, type: .debug, (error?.localizedDescription)!)
     }
-    
+*/
     // MARK: - Dispaly call screen
     
     /**
@@ -249,7 +253,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PusherDelegate {
     
     func dismissVideoVC() {
         if let tabBC = window?.rootViewController as? UITabBarController, let navVC = tabBC.viewControllers?[tabBC.selectedIndex] as? UINavigationController, let lastVC = navVC.viewControllers.last {
-            lastVC.dismiss(animated: false, completion: nil)
+            lastVC.dismiss(animated: true, completion: {
+                VidyoManager.sharedInstance.disconnectMeeting()
+            })
         }
     }
     

@@ -52,6 +52,10 @@ class ContactDetailsVC: UIViewController {
         if let url = URL(string: crtContact.profilePic!) {
             imgViewContact.af_setImage(withURL: url)
         }
+        
+        switchCamera.isOn = Utile.getSwitchOffCamera()!
+        switchMicrophone.isOn = Utile.getSwitchOffMic()!
+        enableDisableCallBtn()
     }
     
     private func enableDisableCallBtn() {
@@ -73,6 +77,9 @@ class ContactDetailsVC: UIViewController {
         enableDisableCallBtn()
     }
     @IBAction func clickedBtnCall(_ sender: UIButton) {
+        Utile.saveCallerID(crtContact.name)
+        Utile.saveSwitchOffCamera(switchCamera.isOn)
+        Utile.saveSwitchOffMic(switchMicrophone.isOn)
         
         var dicParam: [String : String] = [:]
         dicParam["displayName"] = Utile.getUserName()

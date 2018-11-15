@@ -135,23 +135,26 @@ class VidyoManager: NSObject, VCConnectorIConnect {
     }
     
     func onFailure(_ reason: VCConnectorFailReason) {
-        print("Connection failed \(reason)")
+        print("Connection failed \(reason.rawValue)")
         
         DispatchQueue.main.async {
             Utile.hideProgressIndicator()
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.dismissVideoVC()
             
-            if reason.rawValue == 5 {
+//            if reason.rawValue == 5 {
 //                self.alert(message: "VCConnectorFailReasonInvalidToken")
-            }
+//            }
         }
     }
     
     func onDisconnected(_ reason: VCConnectorDisconnectReason) {
-        print("Call Disconnected")
+         print("Connection disconnected \(reason.rawValue)")
         
-//        DispatchQueue.main.async {
-//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//            appDelegate.dismissVideoVC()
-//        }
+        DispatchQueue.main.async {
+            Utile.hideProgressIndicator()
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.dismissVideoVC()
+        }
     }
 }

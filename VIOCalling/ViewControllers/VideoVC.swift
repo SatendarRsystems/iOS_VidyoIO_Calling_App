@@ -46,11 +46,11 @@ class VideoVC: UIViewController {
         
     @IBAction func clickedBtnChat(_ sender: Any) {
         self.dismiss(animated: true, completion: {
-            VidyoManager.sharedInstance.disableMeeting()
+            VidyoManager.sharedInstance.disconnectMeeting()
         })
         
         var dicParam: [String : Any] = [:]
-        dicParam["eventName"] = Utile.getCallerID()
+        dicParam["eventName"] = Utile.getCallerID()?.lowercased()
         fetchPostCallEndedAPI(params: dicParam as [String : AnyObject])
     }
     @IBAction func clickedBtnCameraSwitch(_ sender: UIButton) {        

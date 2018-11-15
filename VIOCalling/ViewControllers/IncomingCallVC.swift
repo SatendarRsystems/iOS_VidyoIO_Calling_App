@@ -58,6 +58,14 @@ class IncomingCallVC: UIViewController {
     @IBAction func clickedBtnAnswer(_ sender: UIButton) {
 //        self.dismiss(animated: true, completion: nil)
         
+        Utile.showProgressIndicator()
+        VidyoManager.sharedInstance.initVidyoConnector()
+        VidyoManager.sharedInstance.refreshUI()
+        VidyoManager.sharedInstance.connectMeeting()
+        VidyoManager.sharedInstance.switchOffMic(false)
+        VidyoManager.sharedInstance.switchOffSpeaker(false)
+        VidyoManager.sharedInstance.switchOffCamera(true)
+        
         var dicParam: [String : Any] = [:]
         dicParam["eventName"] = strContactName.lowercased()
         dicParam["isAccept"] = true
@@ -68,17 +76,11 @@ class IncomingCallVC: UIViewController {
     //MARK: - API calls
     
     private func requesPostAcceptCall(params: [String : AnyObject]) {
-        AFWrapper.requestPostAcceptRejectCall(params: params, showActivity: true, success: {
+        AFWrapper.requestPostAcceptRejectCall(params: params, showActivity: false, success: {
             (resJson) -> Void in
-            Utile.showProgressIndicator()
-            VidyoManager.sharedInstance.refreshUI()
-            VidyoManager.sharedInstance.connectMeeting()
-            VidyoManager.sharedInstance.switchOffMic(false)
-            VidyoManager.sharedInstance.switchOffSpeaker(false)
-            VidyoManager.sharedInstance.switchOffCamera(true)
             
         }, failure: {
-            (error) -> Void in
+            (error) -> Void in            
         })
     }
     
